@@ -98,7 +98,7 @@ a!localVariables(
 
 ---
 
-## Real-World Engineering & Troubleshooting Insights
+## Troubleshooting Insights
 
 Building this hybrid lab exposed several critical architecture constraints and cross-platform boundaries:
 
