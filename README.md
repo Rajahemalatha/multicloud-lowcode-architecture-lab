@@ -2,7 +2,7 @@
 
 A functional, serverless microservice pipeline connecting an enterprise low-code platform (Appian) with public cloud infrastructure (AWS Serverless) via secure REST API channels.
 
-## 📐 Architecture Overview
+## Architecture Overview
 
 ```text
 [Appian Cloud Sandbox] ──(Outbound HTTPS POST)──> [AWS API Gateway] ──> [AWS Lambda (Python)] ──(Inbound Write)──> [Appian Data Fabric / DB]
@@ -15,7 +15,7 @@ A functional, serverless microservice pipeline connecting an enterprise low-code
 
 ---
 
-## 🛠️ Code Artifacts
+## Code Artifacts
 
 ### 1. AWS Lambda Microservice Script (`lambda_function.py`)
 ```python
@@ -98,7 +98,7 @@ a!localVariables(
 
 ---
 
-## 🧠 Real-World Engineering & Troubleshooting Insights
+## Real-World Engineering & Troubleshooting Insights
 
 Building this hybrid lab exposed several critical architecture constraints and cross-platform boundaries:
 
