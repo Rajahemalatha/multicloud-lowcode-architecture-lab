@@ -3,7 +3,7 @@
 ## Project Overview
 1. **User Interface:** UI for users to fill the invoice details.
 2. **Integration:** Configure Connected System and Integration to transmit invoice data securely to AWS.
-3. **Lambda and API Gateway:** Write a python lambda function to parse the incoming payload, store in S3 and response to Appian. Configure API gateway with HTTP API, route, method and integration configuration.
+3. **Lambda and API Gateway:** Write a python lambda function to parse the incoming payload, store in S3 and draft a response to Appian. Configure API gateway with HTTP API, route, method and integration configuration.
 4. **S3 bucket:** Create S3 bucket to store invoice details in CSV.
 5. **Download CSV from S3:** Use Power Automate workflow to download Invoice file from S3 to local.
 
