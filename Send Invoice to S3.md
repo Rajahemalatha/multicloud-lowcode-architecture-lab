@@ -72,6 +72,8 @@ def lambda_handler(event, context):
             'body': json.dumps({'system_error': str(e)})
         }
 ```
+
+### Power Automate workflow to download CSV file from S3 to Local folder
 <img width="1133" height="504" alt="image" src="https://github.com/user-attachments/assets/9f9ec6e5-1dfd-4541-993c-6b690eb0db60" />
 
 
