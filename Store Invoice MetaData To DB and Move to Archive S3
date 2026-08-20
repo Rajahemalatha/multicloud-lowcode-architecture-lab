@@ -1,0 +1,30 @@
+# Appian-AWS Enterprise Document Pipeline
+
+## 📌 Project Overview
+An enterprise-grade cloud integration pipeline designed to offload document archival, compliance encryption, and audit logging from Appian Cloud to AWS native serverless services. This prevents performance degradation on the Appian process engines during high-volume document workflows.
+
+## 🏗️ Architecture Design
+- **Upstream Trigger**: Appian Cloud drops transactional files (PDF/CSV) into a staging area.
+- **Ingestion Staging**: `Amazon S3` Inbound Bucket acting as an event-driven gateway.
+- **Compute Layer**: `AWS Lambda` running an asynchronous Python 3.12 automation trigger.
+- **Audit Ledger**: NoSQL `Amazon DynamoDB` table tracking file compliance life cycles.
+- **Storage Vault**: Isolated `Amazon S3` Archive Vault bucket for long-term data preservation.
+
+graph TD
+    A[Appian Cloud] -->|Uploads PDF/CSV| B(S3 Inbound Bucket)
+    B -->|S3 Event Trigger| C[AWS Lambda - Python]
+    C -->|1. PutItem Log| D[(Amazon DynamoDB)]
+    C -->|2. s3.copy File| E(S3 Archive Vault)
+    C -->|3. s3.delete Old File| B
+
+## 🔒 Security & Cloud Governance Applied
+- **Principle of Least Privilege**: Used tightly scoped IAM Execution Roles restricting the Lambda function to specific DynamoDB (`PutItem`) and S3 (`GetObject`, `DeleteObject`) actions.
+- **Resource-Based Invocation Policies**: Enforced isolated security boundaries allowing only the specific staging S3 bucket to trigger Lambda compute blocks.
+- **Data Compliance Protection**: Configured automated cleanup logic that purges the staging inbound bucket immediately after the transaction is written to the archive vault.
+
+## 🚀 How It Works (Production Walkthrough)
+1. A transaction document is uploaded to the staging bucket `appian-banking-inbound-storage`.
+2. S3 fires an event notification directly to the Lambda function.
+3. Lambda generates a unique transaction UUID (`FileId`) and logs metadata to DynamoDB.
+4. The file is copied to `appian-banking-archive-vault` with an `archived-` prefix.
+5. The original file is safely deleted from the inbound landing zone.
